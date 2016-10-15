@@ -1,15 +1,46 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+
+
+.controller('getPhrase',
+  ['$rootScope', '$scope', 'UtilityService',
+  function ($rootScope, $scope, UtilityService) {
+    
+   
+    // Set phrase initially 
+    var phrase = UtilityService.getRandomPhrase()    
+    $scope.currentPhrase = phrase.selectedPhrase.phrase
+  
+  
+    // Update phrase
+    $scope.updatePhrase = function () {
+      var phrase = UtilityService.getRandomPhrase()    
+      $scope.currentPhrase = phrase.selectedPhrase.phrase    
+    };
+  
+    // Non active function
+    $scope.nonActiveFunction = function () {
+      alert("Funktionen \344r inte aktiverad \344n")
+    };
+    
+    
+    //// Set the original/default language
+    //var lang = "en";
+    //var currentClass = "currentLang";
+    //
+    //// Load the language lib
+    //google.load("language",1);
+    //
+    
+    
+    
+  
+  }])
+  
+  
+.controller('DashCtrl', function($scope) {})  
 
 .controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
